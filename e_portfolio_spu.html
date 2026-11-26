@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio | นางสาวเปมิกา ศรีพยัคฆ์ - สาขาวิชาภาษาญี่ปุ่นเพื่อการธุรกิจ SPU</title>
+    <!-- นำเข้าฟอนต์ Prompt จาก Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ตัวแปรสีตามธีมแฟ้มสะสมผลงาน (ชมพูซากุระ - ชมพูบานเย็น SPU - ขาว) */
+        :root {
+            --primary-pink: #d81b60;      /* ชมพูเข้มหลัก (SPU / ป้ายหัวข้อในพอร์ต) */
+            --secondary-pink: #ec407a;    /* ชมพูสดใส */
+            --sakura-light: #fff0f5;      /* ชมพูซากุระอ่อนสำหรับพื้นหลังสลับส่วน */
+            --sakura-soft: #fce4ec;       /* ชมพูพาสเทลสำหรับกรอบและแท็ก */
+            --accent-gold: #d97706;       /* สีทองสำหรับป้ายรางวัล */
+            --text-dark: #2d1e24;         /* สีข้อความหลัก */
+            --text-muted: #6b535c;        /* สีข้อความรอง */
+            --white: #ffffff;
+            --border-color: #f8bbd0;
+            --shadow: 0 4px 10px -1px rgba(216, 27, 96, 0.08), 0 2px 4px -1px rgba(216, 27, 96, 0.04);
+            --shadow-hover: 0 12px 20px -3px rgba(216, 27, 96, 0.16), 0 4px 6px -2px rgba(216, 27, 96, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* แถบเมนูนำทาง (Navbar) */
+        header {
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--sakura-soft);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-pink);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .logo span {
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-pink);
+        }
+
+        .btn-github-nav {
+            background-color: var(--primary-pink);
+            color: var(--white) !important;
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.88rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-github-nav:hover {
+            background-color: var(--secondary-pink);
+            transform: translateY(-1px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-pink);
+            cursor: pointer;
+            padding: 0.4rem;
+        }
+
+        /* โครงสร้าง Section ทั่วไป */
+        section {
+            padding: 5.5rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--primary-pink);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-header .underline {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--secondary-pink));
+            margin: 0 auto 1rem;
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* 1. ส่วนหน้าแรก (Hero Section) */
+        #home {
+            padding-top: 8.5rem;
+            padding-bottom: 5.5rem;
+            background: radial-gradient(circle at top right, var(--sakura-soft) 0%, var(--sakura-light) 45%, var(--white) 100%);
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--sakura-soft);
+            color: var(--primary-pink);
+            border: 1px solid var(--border-color);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.55rem;
+            line-height: 1.3;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-pink);
+            display: block;
+            font-size: 2rem;
+            margin-top: 0.25rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--secondary-pink);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.02rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 580px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-pink);
+            color: var(--white);
+            padding: 0.8rem 1.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-pink);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: var(--white);
+            color: var(--primary-pink);
+            border: 2px solid var(--primary-pink);
+            padding: 0.75rem 1.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--sakura-light);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-card-mockup {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-hover);
+            border: 2px solid var(--sakura-soft);
+            text-align: center;
+            width: 100%;
+            max-width: 360px;
+            position: relative;
+        }
+
+        .avatar-placeholder {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-pink), #f48fb1);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            border: 4px solid var(--sakura-soft);
+        }
+
+        .gpax-badge {
+            display: inline-block;
+            background: var(--sakura-light);
+            color: var(--primary-pink);
+            font-weight: 700;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            font-size: 0.92rem;
+            margin-top: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .quote-box {
+            background: var(--sakura-light);
+            color: var(--text-dark);
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 1.25rem;
+            border-left: 4px solid var(--primary-pink);
+            font-style: italic;
+        }
+
+        /* 2. ส่วนแนะนำตัว (About & SOP Section) */
+        #about {
+            background-color: var(--white);
+        }
+
+        .sop-card {
+            background: linear-gradient(to right, var(--sakura-light), var(--white));
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary-pink);
+            border-radius: 14px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .sop-card h3 {
+            color: var(--primary-pink);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sop-card p {
+            color: var(--text-dark);
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .sop-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .info-card, .grades-card {
+            background-color: var(--sakura-light);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card h3, .grades-card h3 {
+            font-size: 1.25rem;
+            color: var(--primary-pink);
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid var(--sakura-soft);
+            padding-bottom: 0.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .info-list strong {
+            color: var(--text-dark);
+            min-width: 135px;
+        }
+
+        .grade-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .grade-item {
+            background: var(--white);
+            padding: 0.65rem 0.9rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.88rem;
+            border: 1px solid var(--sakura-soft);
+        }
+
+        .grade-score {
+            font-weight: 700;
+            color: var(--primary-pink);
+            background: var(--sakura-light);
+            padding: 0.15rem 0.55rem;
+            border-radius: 6px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.25rem;
+        }
+
+        .skill-tag {
+            background-color: var(--white);
+            color: var(--primary-pink);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* 3. ส่วนผลงาน (Projects & Awards Section) */
+        #projects {
+            background-color: var(--sakura-light);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            padding: 0.55rem 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-pink);
+            color: var(--white);
+            border-color: var(--primary-pink);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-banner {
+            height: 135px;
+            background: linear-gradient(135deg, var(--primary-pink), #f06292);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2.6rem;
+            position: relative;
+        }
+
+        .card-category {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.94);
+            color: var(--primary-pink);
+            padding: 0.2rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-award {
+            position: absolute;
+            bottom: 10px;
+            left: 12px;
+            background: #fffbeb;
+            color: var(--accent-gold);
+            border: 1px solid #fde68a;
+            padding: 0.15rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body h3 {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+        }
+
+        .card-body p {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .card-links {
+            display: flex;
+            gap: 1rem;
+            border-top: 1px solid var(--sakura-soft);
+            padding-top: 0.9rem;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: var(--primary-pink);
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .card-link:hover {
+            color: var(--secondary-pink);
+            text-decoration: underline;
+        }
+
+        /* 4. ส่วนกิจกรรม (Activities Section) */
+        #activities {
+            background-color: var(--white);
+        }
+
+        .timeline {
+            max-width: 820px;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: var(--sakura-light);
+            padding: 1.5rem;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.65rem;
+            top: 1.5rem;
+            width: 18px;
+            height: 18px;
+            background-color: var(--primary-pink);
+            border: 4px solid var(--white);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px var(--primary-pink);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--white);
+            background-color: var(--secondary-pink);
+            padding: 0.15rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            margin-bottom: 0.45rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+        }
+
+        /* ส่วนท้ายเว็บไซต์ (Footer) */
+        footer {
+            background: linear-gradient(135deg, #ad1457 0%, var(--primary-pink) 100%);
+            color: var(--white);
+            padding: 3.5rem 1.5rem 1.5rem;
+        }
+
+        .footer-grid {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1.1fr;
+            gap: 2.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-info h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-info p {
+            color: #fce4ec;
+            font-size: 0.92rem;
+            max-width: 380px;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+            color: #f8bbd0;
+        }
+
+        .footer-links ul, .footer-contact ul {
+            list-style: none;
+        }
+
+        .footer-links li, .footer-contact li {
+            margin-bottom: 0.6rem;
+            font-size: 0.92rem;
+            color: #fff0f5;
+        }
+
+        .footer-links a, .footer-contact a {
+            color: #fff0f5;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover, .footer-contact a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1140px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #f8bbd0;
+        }
+
+        /* การปรับแต่งสำหรับหน้าจอมือถือและแท็บเล็ต (Responsive) */
+        @media (max-width: 860px) {
+            .hero-grid, .about-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content h1 span {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: var(--shadow);
+                gap: 1.25rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .grade-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- แถบเมนูนำทาง -->
+    <header>
+        <div class="nav-container">
+            <a href="#home" class="logo">🌸 Pemika <span>| SPU Portfolio</span></a>
+            <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนูนำทาง">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-item active">หน้าแรก</a></li>
+                <li><a href="#about" class="nav-item">แนะนำตัว</a></li>
+                <li><a href="#projects" class="nav-item">ผลงาน</a></li>
+                <li><a href="#activities" class="nav-item">กิจกรรม</a></li>
+                <li>
+                    <a href="https://github.com/Sobax-Mixt" target="_blank" rel="noopener noreferrer" class="btn-github-nav">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- 1. ส่วนหน้าแรก (Hero Section) -->
+    <section id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="badge">PORTFOLIO • มหาวิทยาลัยศรีปทุม (SPU)</span>
+                <h1>นางสาวเปมิกา ศรีพยัคฆ์ <span>คณะศิลปศาสตร์ สาขาวิชาภาษาญี่ปุ่นเพื่อการธุรกิจ</span></h1>
+                <div class="hero-subtitle">โรงเรียนธัญรัตน์ • แผนการเรียนศิลป์ภาษาญี่ปุ่น (ม.6/6)</div>
+                <p>มุ่งมั่นพัฒนาทักษะภาษาญี่ปุ่นและองค์ความรู้ทางวัฒนธรรมควบคู่กับเทคโนโลยีสมัยใหม่ เพื่อก้าวสู่การเป็นบุคลากรคุณภาพในสายงานล่าม ครูสอนภาษาญี่ปุ่น หรือนักการทูตในอนาคต</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn-primary">ชมผลงานและรางวัล</a>
+                    <a href="https://github.com/Sobax-Mixt" target="_blank" rel="noopener noreferrer" class="btn-outline">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        GitHub Profile
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="profile-card-mockup">
+                    <div class="avatar-placeholder">🇯🇵</div>
+                    <h3>เปมิกา ศรีพยัคฆ์ (มิ้นท์)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">โรงเรียนธัญรัตน์ จ.ปทุมธานี</p>
+                    <div class="gpax-badge">GPAX เฉลี่ยตลอดหลักสูตร: 3.93</div>
+                    <div class="quote-box">
+                        "ยึดมั่นในสิ่งที่รัก อดทนกับสิ่งที่ทำ แล้วผลลัพธ์จะงดงามตามเวลาของมัน เปรียบเสมือนต้นไม้นานาที่กว่าจะออกดอก ที่ต้องอดทนผ่านฤดูหนาวที่ทรมาน"
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. ส่วนแนะนำตัว (About & Statement of Purpose) -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>แนะนำตัวและเป้าหมายการศึกษา</h2>
+                <div class="underline"></div>
+                <p>Statement of Purpose ประวัติส่วนตัว และผลการเรียนระดับมัธยมศึกษาตอนปลาย</p>
+            </div>
+
+            <!-- Statement of Purpose -->
+            <div class="sop-card">
+                <h3>🌸 Statement of Purpose (เหตุผลในการเข้าศึกษาต่อ)</h3>
+                <p>จุดเริ่มต้นความรักในภาษาญี่ปุ่นเกิดจากการชมอนิเมะในวัยเด็ก จนกระทั่งชั้นประถมศึกษาปีที่ 4 จึงเริ่มศึกษาประวัติความเป็นมาด้วยตนเอง และมุ่งมั่นสอบเข้าโรงเรียนธัญรัตน์เพื่อเดินตามความฝันในแผนการเรียนศิลป์-ภาษาญี่ปุ่น แม้จะเคยผ่านความท้าทายและต้องปรับตัว แต่ด้วยความอดทนสูงและการยึดมั่นในเป้าหมายอย่างจริงจัง ทำให้สามารถพัฒนาทักษะภาษาญี่ปุ่นจนมีพื้นฐานที่แข็งแกร่งขึ้นตามลำดับ</p>
+                <p>ดิฉันตั้งใจจะนำองค์ความรู้ทางภาษาญี่ปุ่นและวัฒนธรรมจาก <strong>คณะศิลปศาสตร์ สาขาวิชาภาษาญี่ปุ่นเพื่อการธุรกิจ มหาวิทยาลัยศรีปทุม</strong> มายกระดับทักษะการสื่อสารระดับมืออาชีพ เพื่อต่อยอดสู่อาชีพ <strong>ล่ามภาษาญี่ปุ่น ครูสอนภาษาญี่ปุ่น หรือนักการทูต</strong> ที่เป็นสะพานเชื่อมความสัมพันธ์ระหว่างประเทศอย่างภาคภูมิใจ</p>
+            </div>
+
+            <div class="about-grid">
+                <!-- ข้อมูลส่วนตัวและทักษะ -->
+                <div class="info-card">
+                    <h3>ข้อมูลส่วนตัว (Profile)</h3>
+                    <ul class="info-list">
+                        <li><strong>ชื่อ - นามสกุล:</strong> นางสาวเปมิกา ศรีพยัคฆ์</li>
+                        <li><strong>ชื่อเล่น:</strong> มิ้นท์ (Mint)</li>
+                        <li><strong>วันเกิด:</strong> 14 สิงหาคม พ.ศ. 2551</li>
+                        <li><strong>สัญชาติ / ศาสนา:</strong> ไทย / พุทธ</li>
+                        <li><strong>สถานศึกษา:</strong> โรงเรียนธัญรัตน์ จ.ปทุมธานี</li>
+                        <li><strong>แผนการเรียน:</strong> ศิลป์ภาษาญี่ปุ่น (ม.6/6)</li>
+                    </ul>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ภาษาญี่ปุ่นเพื่อการสื่อสาร</span>
+                        <span class="skill-tag">วัฒนธรรมญี่ปุ่น</span>
+                        <span class="skill-tag">การออกแบบ Infographic</span>
+                        <span class="skill-tag">Digital Art & วาดภาพ</span>
+                        <span class="skill-tag">ประยุกต์ใช้ AI การเรียนรู้</span>
+                        <span class="skill-tag">การบริหารจัดการงานอีเวนต์</span>
+                    </div>
+                </div>
+
+                <!-- สรุปผลการเรียน ปพ.1 -->
+                <div class="grades-card">
+                    <h3>ผลการเรียนรายกลุ่มสาระ ปพ.1 (GPAX 3.93)</h3>
+                    <div class="grade-grid">
+                        <div class="grade-item"><span>ภาษาต่างประเทศ (ญี่ปุ่น/อังกฤษ)</span><span class="grade-score">4.00</span></div>
+                        <div class="grade-item"><span>สังคมศึกษา ศาสนาฯ</span><span class="grade-score">4.00</span></div>
+                        <div class="grade-item"><span>การศึกษาค้นคว้าด้วยตนเอง (IS)</span><span class="grade-score">4.00</span></div>
+                        <div class="grade-item"><span>สุขศึกษาและพลศึกษา</span><span class="grade-score">4.00</span></div>
+                        <div class="grade-item"><span>ศิลปะ</span><span class="grade-score">3.96</span></div>
+                        <div class="grade-item"><span>วิทยาศาสตร์และเทคโนโลยี</span><span class="grade-score">3.91</span></div>
+                        <div class="grade-item"><span>การงานอาชีพ</span><span class="grade-score">3.90</span></div>
+                        <div class="grade-item"><span>คณิตศาสตร์ / ภาษาไทย</span><span class="grade-score">3.70 / 3.60</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. ส่วนผลงาน (Projects & Awards) -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>ผลงานและรางวัลความภาคภูมิใจ</h2>
+                <div class="underline"></div>
+                <p>ผลงานด้านภาษาญี่ปุ่น การแข่งขันวิชาการ การออกแบบสื่อสร้างสรรค์ และโครงงานคุณธรรม</p>
+            </div>
+
+            <!-- ปุ่มกรองหมวดหมู่ผลงาน -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                <button class="filter-btn" data-filter="japanese">ทักษะภาษาญี่ปุ่น</button>
+                <button class="filter-btn" data-filter="design">ออกแบบ & ศิลปะดิจิทัล</button>
+                <button class="filter-btn" data-filter="volunteer">จิตอาสา & สร้างสรรค์</button>
+            </div>
+
+            <!-- การ์ดแสดงผลงาน -->
+            <div class="projects-grid">
+                <!-- ผลงานที่ 1 -->
+                <article class="project-card" data-category="japanese">
+                    <div class="card-banner">
+                        <span>🏆</span>
+                        <span class="card-category">ทักษะภาษาญี่ปุ่น</span>
+                        <span class="card-award">รางวัลชนะเลิศอันดับที่ 1</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>การแข่งขัน J CHALLENGE ตอบปัญหา "รอบรู้ประเทศญี่ปุ่น"</h3>
+                        <p>ประยุกต์ใช้เทคโนโลยี AI ในการจำลองคลังคำถามวัฒนธรรมและความรู้รอบตัวประเทศญี่ปุ่น วางแผนทบทวนเนื้อหาเชิงลึกภายใน 9 ชั่วโมงก่อนแข่ง จนคว้ารางวัลชนะเลิศอันดับ 1</p>
+                        <div class="card-links">
+                            <a href="#activities" class="card-link">ดูรายละเอียดประสบการณ์ →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ผลงานที่ 2 -->
+                <article class="project-card" data-category="design">
+                    <div class="card-banner">
+                        <span>🌸</span>
+                        <span class="card-category">ออกแบบสื่อ</span>
+                        <span class="card-award">รางวัลรองชนะเลิศอันดับ 2</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>ประกวดสื่อ Infographic "Japan in One Page"</h3>
+                        <p>ค้นคว้าข้อมูลเชิงลึกเกี่ยวกับเทศกาลชมดอกซากุระ (桜祭り) ทั้งประวัติความเป็นมา จุดเด่น และอาหารยอดฮิต นำมาย่อยและออกแบบจัดวางองค์ประกอบจบในหน้าเดียวอย่างสวยงาม</p>
+                        <div class="card-links">
+                            <a href="https://github.com/Sobax-Mixt" target="_blank" rel="noopener noreferrer" class="card-link">คลังผลงานบน GitHub ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ผลงานที่ 3 -->
+                <article class="project-card" data-category="japanese">
+                    <div class="card-banner">
+                        <span>🎙️</span>
+                        <span class="card-category">ทักษะการสื่อสาร</span>
+                        <span class="card-award">ตัวแทนระดับโรงเรียน</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>กิจกรรมเสียงตามสายเล่านิทานภาษาญี่ปุ่น</h3>
+                        <p>รับหน้าที่เป็นตัวแทนเล่าเรื่องผ่านเสียงตามสายภาษาญี่ปุ่นเรื่อง カチカチ山 (Kachi Kachi Yama) ฝึกฝนการออกเสียง น้ำเสียง และจังหวะการพูดอย่างถูกต้องชัดเจน</p>
+                        <div class="card-links">
+                            <a href="#activities" class="card-link">อ่านเพิ่มเติม →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ผลงานที่ 4 -->
+                <article class="project-card" data-category="design">
+                    <div class="card-banner">
+                        <span>🎨</span>
+                        <span class="card-category">ศิลปะดิจิทัล</span>
+                        <span class="card-award">รองชนะเลิศอันดับ 2 & ชมเชย</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>การแข่งขันวาดภาพดิจิทัล (Digital Art) วันวิทยาศาสตร์</h3>
+                        <p>เข้าร่วมแข่งขันวาดภาพดิจิทัลอย่างต่อเนื่องปี 2567–2569 ถ่ายทอดจินตนาการหัวข้อ "วิทยาศาสตร์และเทคโนโลยี" คว้ารางวัลรองชนะเลิศอันดับ 2 (ปี 2568) และรางวัลชมเชย (ปี 2569)</p>
+                        <div class="card-links">
+                            <a href="https://github.com/Sobax-Mixt" target="_blank" rel="noopener noreferrer" class="card-link">ดูแกลเลอรีผลงาน ↗</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ผลงานที่ 5 -->
+                <article class="project-card" data-category="volunteer">
+                    <div class="card-banner">
+                        <span>♻️</span>
+                        <span class="card-category">นวัตกรรมสร้างสรรค์</span>
+                        <span class="card-award">รางวัลชนะเลิศอันดับที่ 1</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>ประกวดชุดและเครื่องประดับรีไซเคิล วันวิทยาศาสตร์</h3>
+                        <p>ได้รับโอกาสเป็นนางแบบสวมเครื่องประดับที่ประดิษฐ์จากวัสดุรีไซเคิล พร้อมนำเสนอแนวคิดวัสดุและวิธีการทำต่อคณะกรรมการอย่างมั่นใจ จนได้รับรางวัลชนะเลิศอันดับที่ 1</p>
+                        <div class="card-links">
+                            <a href="#activities" class="card-link">รายละเอียดกิจกรรม →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ผลงานที่ 6 -->
+                <article class="project-card" data-category="volunteer">
+                    <div class="card-banner">
+                        <span>🤝</span>
+                        <span class="card-category">โครงการคุณธรรม</span>
+                        <span class="card-award">จิตอาสาเพื่อสังคม</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>โครงการคุณธรรม "JAPAN DONATE บริจาคนี้เพื่อฝันหนู"</h3>
+                        <p>ออกแบบสื่อ Infographic ประชาสัมพันธ์เปิดรับบริจาคสิ่งของ เสื้อผ้า และของเล่น พร้อมประสานงานกับโครงการเหลือ-ขอ และ LiTTle StAR Center เพื่อส่งต่อโอกาสให้เด็กยากไร้</p>
+                        <div class="card-links">
+                            <a href="#activities" class="card-link">ดูการดำเนินงาน →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ส่วนกิจกรรม (Activities) -->
+    <section id="activities">
+        <div class="container">
+            <div class="section-header">
+                <h2>กิจกรรมและประสบการณ์เด่น</h2>
+                <div class="underline"></div>
+                <p>การเติบโตผ่านบทบาทผู้นำ การทำงานเป็นทีม และการเผยแพร่วัฒนธรรมญี่ปุ่น</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-date">ปีการศึกษา 2567 – 2569</span>
+                    <h3>เทศกาลวันทานาบาตะ (Tanabata Festival) และผู้ออกแบบการ์ดเชิญ</h3>
+                    <p>เติบโตจากบทบาทผู้บรรยายและนักแสดง (ปี 2567–2568) สู่ทีมงานเบื้องหลังในฐานะผู้ดูแลการฝึกซ้อมและการจัดสรรงาน (ปี 2569) รวมถึงรับหน้าที่ออกแบบการ์ดเชิญร่วมงานอย่างเป็นทางการเพื่อมอบให้คณะผู้บริหารและครูผู้สอน</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-date">กิจกรรมวัฒนธรรมญี่ปุ่น</span>
+                    <h3>ตัวแทนเปิดขบวนธีม "งานแต่งจิ้งจอก" (Kitsune no Yomeiri)</h3>
+                    <p>ได้รับคัดเลือกเป็นตัวแทนนำเปิดขบวนในบทบาท Xiao Miko ฝึกฝนทักษะการแต่งหน้าและการแต่งกายคอสเพลย์ด้วยตนเองอย่างประณีต พร้อมช่วยวางโครงสร้างและกำกับรูปแบบขบวนเพื่อถ่ายทอดเสน่ห์วัฒนธรรมญี่ปุ่น</p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-date">ปีการศึกษา 2568 – 2569</span>
+                    <h3>การแข่งขันวาดภาพระบายสีวันอาเซียน & กิจกรรมพัฒนาผู้เรียน</h3>
+                    <p>ได้รับรางวัลชมเชยการแข่งขันวาดภาพระบายสีวันอาเซียน (ขนาด A3) รวมถึงร่วมกิจกรรมจัดดอกไม้สไตล์ญี่ปุ่น (Ikebana), เกมพื้นบ้านญี่ปุ่น (Fukuwarai) และเขียนการ์ดอวยพรปีใหม่ญี่ปุ่น (Nengajo)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ส่วนท้ายเว็บไซต์ (Footer) -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h3>🌸 Pemika Sriphayak</h3>
+                <p>แฟ้มสะสมผลงานอิเล็กทรอนิกส์ (E-Portfolio) เพื่อยื่นสมัครเข้าศึกษาต่อคณะศิลปศาสตร์ สาขาวิชาภาษาญี่ปุ่นเพื่อการธุรกิจ มหาวิทยาลัยศรีปทุม</p>
+            </div>
+            <div class="footer-links">
+                <h4>เมนูนำทาง</h4>
+                <ul>
+                    <li><a href="#home">หน้าแรก</a></li>
+                    <li><a href="#about">แนะนำตัว & SOP</a></li>
+                    <li><a href="#projects">ผลงานและรางวัล</a></li>
+                    <li><a href="#activities">กิจกรรมเด่น</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>ช่องทางการติดต่อสาธารณะ</h4>
+                <ul>
+                    <li>Instagram: <a href="https://instagram.com/Sobax_Mixt" target="_blank" rel="noopener noreferrer">@Sobax_Mixt</a></li>
+                    <li>TikTok: <a href="https://tiktok.com/@Blaze_fmjapan" target="_blank" rel="noopener noreferrer">@Blaze_fmjapan</a></li>
+                    <li>LINE ID: Mint10381</li>
+                    <li>GitHub: <a href="https://github.com/Sobax-Mixt" target="_blank" rel="noopener noreferrer">github.com/Sobax-Mixt</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="currentYear"></span> E-Portfolio นางสาวเปมิกา ศรีพยัคฆ์ | โรงเรียนธัญรัตน์</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript สำหรับควบคุมเมนูมือถือ ระบบกรองผลงาน และ Scroll Spy -->
+    <script>
+        // 1. เปิด-ปิดเมนูนำทางบนมือถือ
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 2. ระบบกรองหมวดหมู่การ์ดผลงาน
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // 3. เน้นเมนูตามตำแหน่งการเลื่อนหน้าจอ (Scroll Spy)
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (current && item.getAttribute('href').includes(current)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // 4. แสดงปี ค.ศ. ปัจจุบันในส่วนท้ายเว็บไซต์
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
